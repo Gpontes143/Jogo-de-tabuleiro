@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://cp0t0lcqq6wsc"]
+
+[ext_resource type="Script" uid="uid://cfaqos3px31bm" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bbxay37khkecq" path="res://slot_zone.tscn" id="1_ig7tw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.29457638, 0.5543969, 0.13918734, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.3265901, 0.96392363, 0.27314034, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+bg_color = Color(0.29457638, 0.5543969, 0.13918734, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.9144698, 0.9033003, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.29457638, 0.5543969, 0.13918734, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.98039216, 0.019607844, 0, 1)
+
+[node name="Main" type="Control" unique_id=1453278836]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0xm2m")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1215874863]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ZonasContainer" type="HBoxContainer" parent="." unique_id=1127302440]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 250.0
+grow_horizontal = 2
+theme_override_constants/separation = 140
+alignment = 1
+
+[node name="ZonaValor" parent="ZonasContainer" unique_id=1836414484 instance=ExtResource("1_ig7tw")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
+
+[node name="ZonaNecessario" parent="ZonasContainer" unique_id=1222688652 instance=ExtResource("1_ig7tw")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1bvp3")
+tipo_aceito = "necessario"
+
+[node name="ZonaLixo" parent="ZonasContainer" unique_id=635569632 instance=ExtResource("1_ig7tw")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+tipo_aceito = "lixo"
+
+[node name="AreaBase" type="HBoxContainer" parent="." unique_id=359339065]
+custom_minimum_size = Vector2(600, 250)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -230.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AreaBase" unique_id=1271472923]
+custom_minimum_size = Vector2(800, 0)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+vertical_scroll_mode = 0
+
+[node name="MaoCartas" type="HBoxContainer" parent="AreaBase/ScrollContainer" unique_id=293418075]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="PilhaVisual" type="Control" parent="AreaBase" unique_id=1188143493]
+layout_mode = 2
+
+[node name="DeckCartas" type="Button" parent="AreaBase/PilhaVisual" unique_id=1032483795]
+custom_minimum_size = Vector2(180, 230)
+layout_mode = 0
+offset_left = -1151.0
+offset_right = -971.0
+offset_bottom = 250.0
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="AreaBase/PilhaVisual/DeckCartas" unique_id=2117694797]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -11.5
+offset_right = 58.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Deck de Cartas"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=684274306]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LabelPontos" type="Label" parent="VBoxContainer" unique_id=426054855]
+layout_mode = 2
+
+[node name="LabelErros" type="Label" parent="VBoxContainer" unique_id=1284747473]
+layout_mode = 2
+
+[connection signal="pressed" from="AreaBase/PilhaVisual/DeckCartas" to="." method="_on_deck_cartas_pressed"]
+
+[editable path="ZonasContainer/ZonaValor"]
+[editable path="ZonasContainer/ZonaNecessario"]
+[editable path="ZonasContainer/ZonaLixo"]

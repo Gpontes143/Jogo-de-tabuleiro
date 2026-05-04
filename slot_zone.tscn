@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bbxay37khkecq"]
+
+[ext_resource type="Script" uid="uid://b6lj1knqrrpol" path="res://slot_zone.gd" id="1_nmisl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qhiwd"]
+bg_color = Color(0.29457638, 0.5543969, 0.13918734, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+
+[node name="SlotZone" type="PanelContainer" unique_id=1836414484]
+custom_minimum_size = Vector2(200, 250)
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qhiwd")
+script = ExtResource("1_nmisl")
