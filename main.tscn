@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfaqos3px31bm" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bbxay37khkecq" path="res://slot_zone.tscn" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://bqf4covnyw37e" path="res://verso_carta.png" id="3_h2yge"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 bg_color = Color(0.29457638, 0.5543969, 0.13918734, 1)
@@ -124,6 +125,11 @@ grow_vertical = 2
 text = "Deck de Cartas"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="AreaBase/PilhaVisual/DeckCartas" unique_id=1141661399]
+position = Vector2(94, 127.5)
+scale = Vector2(1.075, 1.1227273)
+texture = ExtResource("3_h2yge")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=684274306]
 layout_mode = 0

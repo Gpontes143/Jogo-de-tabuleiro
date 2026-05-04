@@ -1,7 +1,7 @@
 extends Control
 
 @onready var mao_cartas = $AreaBase/ScrollContainer/MaoCartas
-@onready var deck_visual_stack = $AreaBase/DeckContainer/PilhaVisual # Nó que conterá as "cartas falsas"
+#@onready var deck_visual_stack = $AreaBase/DeckContainer/PilhaVisual # Nó que conterá as "cartas falsas"
 var cena_carta = preload("res://Carta.tscn")
 
 var pontos = 0
@@ -23,8 +23,8 @@ var banco_de_dados = [
 
 var estoque = {"valor": 10, "necessario": 10, "lixo": 10}
 
-func _ready():
-	atualizar_pilha_visual()
+#func _ready():
+	#atualizar_pilha_visual()
 
 func puxar_carta_do_deck():
 	var total_deck = estoque["valor"] + estoque["necessario"] + estoque["lixo"]
@@ -49,14 +49,14 @@ func puxar_carta_do_deck():
 	mao_cartas.add_child(nova_carta)
 	
 	# ATUALIZA A PILHA VISUAL
-	atualizar_pilha_visual()
+	#atualizar_pilha_visual()
 
-func atualizar_pilha_visual():
+#func atualizar_pilha_visual():
 	# Limpa a pilha visual atual
-	for child in deck_visual_stack.get_children():
-		child.queue_free()
+#for child in deck_visual_stack.get_children():
+	#	child.queue_free()
 	
-	var total_deck = estoque["valor"] + estoque["necessario"] + estoque["lixo"]
+#	var total_deck = estoque["valor"] + estoque["necessario"] + estoque["lixo"]
 	
 	# Criamos uma "sombra" de carta para cada 5 cartas no deck (para não pesar)
 	# Ou 1 para cada carta se quiser precisão total (máx 30)
@@ -76,9 +76,9 @@ func atualizar_pilha_visual():
 		# O segredo da pilha: deslocar cada camada levemente
 		camada.position = Vector2(-i * 2, -i * 2) 
 		
-		deck_visual_stack.add_child(camada)
+	#	deck_visual_stack.add_child(camada)
 		# Garante que a última camada (a de cima) seja o botão clicável
-		deck_visual_stack.move_child(camada, 0)
+	#	deck_visual_stack.move_child(camada, 0)
 
 func _buscar_item(c):
 	var lista = []
