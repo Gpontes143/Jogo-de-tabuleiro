@@ -2,26 +2,28 @@
 
 [ext_resource type="Script" uid="uid://dudhiliqchd7u" path="res://carta.gd" id="1_ck7s5"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6a6n"]
-bg_color = Color(0.3056264, 0.314448, 0.2967997, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ck7s5"]
+load_path = "res://.godot/imported/carta.png-21f6ad1d28c002b75a98eeee1338bafc.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_ck7s5"]
+line_spacing = 4.0
+font_size = 14
+font_color = Color(0, 0, 0, 1)
 
 [node name="Carta" type="PanelContainer" unique_id=1999689269]
 custom_minimum_size = Vector2(150, 200)
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_b6a6n")
 script = ExtResource("1_ck7s5")
+
+[node name="FundoCarta" type="TextureRect" parent="." unique_id=1148701931]
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_ck7s5")
+expand_mode = 1
 
 [node name="TextoTarefa" type="Label" parent="." unique_id=652843744]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_ck7s5")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3

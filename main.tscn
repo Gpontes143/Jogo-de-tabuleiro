@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cfaqos3px31bm" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bbxay37khkecq" path="res://slot_zone.tscn" id="1_ig7tw"]
-[ext_resource type="Texture2D" uid="uid://bqf4covnyw37e" path="res://verso_carta.png" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://dv3f8vqy8pqyo" path="res://sprites/cartapad.png" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://cnwk51ft2fppl" path="res://pilha_visual.gd" id="4_1bvp3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 bg_color = Color(0.29457638, 0.5543969, 0.13918734, 1)
@@ -44,72 +45,113 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 2.0
+offset_right = 1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="ZonasContainer" type="HBoxContainer" parent="." unique_id=1127302440]
+custom_minimum_size = Vector2(0, 220)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 250.0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 1.0
+offset_bottom = 222.0
 grow_horizontal = 2
-theme_override_constants/separation = 140
+theme_override_constants/separation = 200
 alignment = 1
 
 [node name="ZonaValor" parent="ZonasContainer" unique_id=1836414484 instance=ExtResource("1_ig7tw")]
+custom_minimum_size = Vector2(160, 220)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
+categoria_esperada = "valor"
 
 [node name="ZonaNecessario" parent="ZonasContainer" unique_id=1222688652 instance=ExtResource("1_ig7tw")]
+custom_minimum_size = Vector2(160, 220)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1bvp3")
-tipo_aceito = "necessario"
+categoria_esperada = "necessário"
 
 [node name="ZonaLixo" parent="ZonasContainer" unique_id=635569632 instance=ExtResource("1_ig7tw")]
+custom_minimum_size = Vector2(160, 220)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
-tipo_aceito = "lixo"
+categoria_esperada = "lixo"
 
-[node name="AreaBase" type="HBoxContainer" parent="." unique_id=359339065]
-custom_minimum_size = Vector2(600, 250)
+[node name="EstacaoCompleta" type="Control" parent="." unique_id=1733720475]
+custom_minimum_size = Vector2(1152, 240)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -230.0
+offset_top = -241.0
+offset_right = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="FundoDeckMaos" type="NinePatchRect" parent="EstacaoCompleta" unique_id=1529307221]
+custom_minimum_size = Vector2(0, 280)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_h2yge")
+region_rect = Rect2(0, 0, 1150, 240)
+
+[node name="AreaBase" type="HBoxContainer" parent="EstacaoCompleta" unique_id=359339065]
+custom_minimum_size = Vector2(580, 250)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -260.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="AreaBase" unique_id=1271472923]
-custom_minimum_size = Vector2(800, 0)
-layout_direction = 2
-layout_mode = 2
-size_flags_horizontal = 3
-vertical_scroll_mode = 0
-
-[node name="MaoCartas" type="HBoxContainer" parent="AreaBase/ScrollContainer" unique_id=293418075]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="PilhaVisual" type="Control" parent="AreaBase" unique_id=1188143493]
+[node name="EspacadorEsquerda" type="Control" parent="EstacaoCompleta/AreaBase" unique_id=1215839163]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 
-[node name="DeckCartas" type="Button" parent="AreaBase/PilhaVisual" unique_id=1032483795]
-custom_minimum_size = Vector2(180, 230)
-layout_mode = 0
-offset_left = -1151.0
-offset_right = -971.0
+[node name="DeckContainer" type="Control" parent="EstacaoCompleta/AreaBase" unique_id=911407182]
+custom_minimum_size = Vector2(160, 220)
+layout_mode = 2
+
+[node name="PilhaVisual" type="Control" parent="EstacaoCompleta/AreaBase/DeckContainer" unique_id=1188143493]
+anchors_preset = 0
+offset_left = -4.0
+offset_right = -4.0
 offset_bottom = 250.0
-size_flags_horizontal = 0
+script = ExtResource("4_1bvp3")
 
-[node name="Label" type="Label" parent="AreaBase/PilhaVisual/DeckCartas" unique_id=2117694797]
+[node name="DeckCartas" type="Button" parent="EstacaoCompleta/AreaBase/DeckContainer" unique_id=1032483795]
+visible = false
+custom_minimum_size = Vector2(160, 220)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+flat = true
+
+[node name="Label" type="Label" parent="EstacaoCompleta/AreaBase/DeckContainer/DeckCartas" unique_id=2117694797]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -126,10 +168,21 @@ text = "Deck de Cartas"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="AreaBase/PilhaVisual/DeckCartas" unique_id=1141661399]
-position = Vector2(94, 127.5)
-scale = Vector2(1.075, 1.1227273)
-texture = ExtResource("3_h2yge")
+[node name="EspacadorEsquerda2" type="Control" parent="EstacaoCompleta/AreaBase" unique_id=1848045942]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="EstacaoCompleta/AreaBase" unique_id=1271472923]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+vertical_scroll_mode = 0
+
+[node name="MaoCartas" type="HBoxContainer" parent="EstacaoCompleta/AreaBase/ScrollContainer" unique_id=293418075]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=684274306]
 layout_mode = 0
@@ -142,7 +195,10 @@ layout_mode = 2
 [node name="LabelErros" type="Label" parent="VBoxContainer" unique_id=1284747473]
 layout_mode = 2
 
-[connection signal="pressed" from="AreaBase/PilhaVisual/DeckCartas" to="." method="_on_deck_cartas_pressed"]
+[node name="LabelAcertos" type="Label" parent="VBoxContainer" unique_id=1258384550]
+layout_mode = 2
+
+[connection signal="pressed" from="EstacaoCompleta/AreaBase/DeckContainer/DeckCartas" to="." method="_on_deck_cartas_pressed"]
 
 [editable path="ZonasContainer/ZonaValor"]
 [editable path="ZonasContainer/ZonaNecessario"]

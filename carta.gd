@@ -1,44 +1,35 @@
-extends PanelContainer
+extends Control
 
-@export var texto_da_tarefa: String = ""
-@export var categoria_correta: String = ""
-@export var caminho_sprite: String = ""
-@export var esta_virada: bool = false # Se true, mostra o verso
+# Referências aos nós internos
+@onready var label_texto = $TextoTarefa 
+@onready var fundo_visual = $FundoCarta # O TextureRect com a sua arte nova
 
-@onready var label = $VBoxContainer/TextoTarefa
-@onready var foto_rect = $VBoxContainer/IconeTarefa
+var texto_da_tarefa: String = ""
+var categoria_correta: String = ""
 
 func _ready():
-	configurar_visual()
+	# Aplica o texto da tarefa na frente da carta
+	if label_texto:
+		label_texto.text = texto_da_tarefa
+		label_texto.autowrap_mode = TextServer.AUTOWRAP_WORD
+		label_texto.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label_texto.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 
-func configurar_visual():
-	# Define o tamanho para todas as cartas serem iguais
-	custom_minimum_size = Vector2(160, 220)
-	
-	if esta_virada:
-		# Lógica para o verso da carta (no deck)
-		label.hide()
-		foto_rect.hide()
-		var style = get_theme_stylebox("panel").duplicate()
-		style.bg_color = Color("2c3e50") # Azul escuro/cinza profissional
-		style.border_width_all = 4
-		style.border_color = Color("ecf0f1") # Borda clara
-		add_theme_stylebox_override("panel", style)
-	else:
-		# Lógica para a frente da carta (na mão)
-		label.show()
-		foto_rect.show()
-		label.text = texto_da_tarefa
-		if caminho_sprite != "":
-			foto_rect.texture = load(caminho_sprite)
-
+# --- LÓGICA DE ARRASTAR ---
 func _get_drag_data(_at_position):
-	if esta_virada: return null # Não permite arrastar do deck
+	var preview = self.duplicate()
+	preview.modulate.a = 0.7
+	preview.scale = Vector2(1.1, 1.1)
 	
-	var preview_container = Control.new()
-	var copia = self.duplicate()
-	copia.position = -custom_minimum_size / 2
-	copia.modulate.a = 0.7
-	preview_container.add_child(copia)
-	set_drag_preview(preview_container)
+	var c = Control.new()
+	c.add_child(preview)
+	preview.position = -self.size / 2
+	set_drag_preview(c)
+	
+	self.visible = false 
 	return self
+
+func _notification(what):
+	if what == NOTIFICATION_DRAG_END:
+		if not is_queued_for_deletion():
+			self.visible = true

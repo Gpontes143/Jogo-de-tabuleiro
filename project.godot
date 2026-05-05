@@ -13,7 +13,12 @@ config_version=5
 config/name="Revelação"
 run/main_scene="uid://cp0t0lcqq6wsc"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://sprites/icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [physics]
 

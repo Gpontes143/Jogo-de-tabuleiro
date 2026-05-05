@@ -10,7 +10,7 @@ border_width_right = 5
 border_width_bottom = 5
 
 [node name="SlotZone" type="PanelContainer" unique_id=1836414484]
-custom_minimum_size = Vector2(200, 250)
+custom_minimum_size = Vector2(200, 220)
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_qhiwd")
