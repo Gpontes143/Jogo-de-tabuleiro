@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://0xdsvvm521fu"]
+
+[ext_resource type="Script" uid="uid://hi7rqbtvd0n4" path="res://menu_inicial.gd" id="1_3exob"]
+[ext_resource type="Texture2D" uid="uid://csgp5og24paio" path="res://sprites/fundo.png" id="1_u4fxu"]
+
+[node name="MenuInicial" type="Control" unique_id=938754197]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3exob")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1500570198]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_u4fxu")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1510014082]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=824419967]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=289587130]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Revelaçoes "
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="CenterContainer/VBoxContainer" unique_id=1734136232]
+layout_mode = 2
+
+[node name="Jogar" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1987739203]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Jogar"
+
+[node name="Sair" type="Button" parent="CenterContainer/VBoxContainer" unique_id=550490698]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Sair"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Jogar" to="." method="_on_jogar_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Sair" to="." method="_on_sair_pressed"]

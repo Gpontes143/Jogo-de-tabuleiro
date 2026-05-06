@@ -6,8 +6,8 @@
 load_path = "res://.godot/imported/carta.png-21f6ad1d28c002b75a98eeee1338bafc.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_ck7s5"]
-line_spacing = 4.0
-font_size = 14
+line_spacing = 6.0
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [node name="Carta" type="PanelContainer" unique_id=1999689269]
@@ -21,7 +21,19 @@ layout_mode = 2
 texture = SubResource("CompressedTexture2D_ck7s5")
 expand_mode = 1
 
-[node name="TextoTarefa" type="Label" parent="." unique_id=652843744]
+[node name="MarginContainer" type="MarginContainer" parent="FundoCarta" unique_id=322540403]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 21
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 40
+
+[node name="TextoTarefa" type="Label" parent="FundoCarta/MarginContainer" unique_id=652843744]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_ck7s5")
 horizontal_alignment = 1

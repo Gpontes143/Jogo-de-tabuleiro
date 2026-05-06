@@ -6,9 +6,9 @@ extends Node
 @onready var botao_deck = $EstacaoCompleta/AreaBase/DeckContainer/DeckCartas
 @onready var label_deck = $EstacaoCompleta/AreaBase/DeckContainer/DeckCartas/Label
 
-@onready var label_pontos = $VBoxContainer/LabelPontos
-@onready var label_erros = $VBoxContainer/LabelErros
-@onready var label_acertos = $VBoxContainer/LabelAcertos
+@onready var label_pontos = $PanelContainer/BoxPontuacao/LabelPontos
+@onready var label_erros = $PanelContainer/BoxPontuacao/LabelErros
+@onready var label_acertos = $PanelContainer/BoxPontuacao/LabelAcertos
 
 # --- RECURSOS ---
 var cena_carta = preload("res://Carta.tscn")
@@ -26,6 +26,7 @@ var stats = {
 }
 
 var banco_de_dados = [
+	# CATEGORIA: VALOR (10)
 	{"nome": "Código sistema elétrico", "categoria": "valor"},
 	{"nome": "Nova Feature API", "categoria": "valor"},
 	{"nome": "Teste Feature API", "categoria": "valor"},
@@ -36,6 +37,8 @@ var banco_de_dados = [
 	{"nome": "Review de Código", "categoria": "valor"},
 	{"nome": "Fabricação cerveja", "categoria": "valor"}, 
 	{"nome": "Análise de Dados", "categoria": "valor"},
+
+	# CATEGORIA: NECESSARIO (10)
 	{"nome": "Reunião semanal", "categoria": "necessário"},
 	{"nome": "Responder Slack", "categoria": "necessário"},
 	{"nome": "Planejamento Semanal", "categoria": "necessário"},
@@ -46,6 +49,8 @@ var banco_de_dados = [
 	{"nome": "Manutenção do Hardware", "categoria": "necessário"}, 
 	{"nome": "Melhoria de UI", "categoria": "necessário"},
 	{"nome": "Backup de Firmware", "categoria": "necessário"}, 
+
+	# CATEGORIA: LIXO (10)
 	{"nome": "Corrente de E-mail", "categoria": "lixo"},
 	{"nome": "Reunião sem Pauta", "categoria": "lixo"},
 	{"nome": "Spam no Inbox", "categoria": "lixo"},
@@ -78,7 +83,7 @@ func _atualizar_estado_do_deck():
 	pilha_visual.atualizar_pilha(baralho.size())
 
 func puxar_carta_do_deck():
-	if mao_cartas.get_child_count() >= 4 or baralho.is_empty():
+	if mao_cartas.get_child_count() >= 52 or baralho.is_empty():
 		return
 		
 	var item = baralho.pop_front()
@@ -135,7 +140,13 @@ func exibir_relatorio():
 	for cat in stats.keys():
 		msg += "%s: %d Ac | %d Er\n" % [cat.capitalize(), stats[cat]["acertos"], stats[cat]["erros"]]
 	OS.alert(msg, "Fim da Partida")
-
+	jogo_terminou()
+func jogo_terminou():
+	# Espera um tempinho para o jogador ver o resultado (opcional)
+	await get_tree().create_timer(5.0).timeout
+	
+	# Volta para a cena do menu
+	get_tree().change_scene_to_file("res://menu_inicial.tscn")
 func _animar_label(label: Label, cor: Color):
 	if not label: return
 	label.pivot_offset = label.size / 2 

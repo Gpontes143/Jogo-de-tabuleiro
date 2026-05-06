@@ -1,7 +1,7 @@
 extends Control
 
 # Referências aos nós internos
-@onready var label_texto = $TextoTarefa 
+@onready var label_texto = $FundoCarta/MarginContainer/TextoTarefa
 @onready var fundo_visual = $FundoCarta # O TextureRect com a sua arte nova
 
 var texto_da_tarefa: String = ""
