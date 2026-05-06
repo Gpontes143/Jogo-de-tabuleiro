@@ -83,7 +83,7 @@ func _atualizar_estado_do_deck():
 	pilha_visual.atualizar_pilha(baralho.size())
 
 func puxar_carta_do_deck():
-	if mao_cartas.get_child_count() >= 52 or baralho.is_empty():
+	if mao_cartas.get_child_count() >= 5 or baralho.is_empty():
 		return
 		
 	var item = baralho.pop_front()
