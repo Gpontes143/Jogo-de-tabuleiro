@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://daibnqbnjurcw" path="res://sprites/Valor.png" id="4_5vw27"]
 [ext_resource type="Texture2D" uid="uid://jcw8u2ojail3" path="res://sprites/necessario.png" id="5_kek77"]
 [ext_resource type="Texture2D" uid="uid://d078u2t34klay" path="res://sprites/lixo.png" id="6_4c57u"]
+[ext_resource type="AudioStream" uid="uid://ckohothpacfdw" path="res://audio/PointEffect.mp3" id="9_4c57u"]
+[ext_resource type="Script" uid="uid://vui52vqr11nv" path="res://camera_2d.gd" id="10_dg77c"]
+[ext_resource type="AudioStream" uid="uid://c0lh86buejtlt" path="res://audio/ErroEffect.wav" id="10_efxa6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 bg_color = Color(0.29457638, 0.5543969, 0.13918734, 1)
@@ -55,6 +58,13 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0xm2m")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1034542009]
+limit_left = 0
+limit_top = 0
+limit_right = 1280
+limit_bottom = 720
+script = ExtResource("10_dg77c")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=203517317]
 layout_mode = 0
@@ -242,6 +252,12 @@ layout_mode = 2
 
 [node name="LabelErros" type="Label" parent="PanelContainer/BoxPontuacao" unique_id=1284747473]
 layout_mode = 2
+
+[node name="SomPonto" type="AudioStreamPlayer" parent="." unique_id=1629098555]
+stream = ExtResource("9_4c57u")
+
+[node name="SomErro" type="AudioStreamPlayer" parent="." unique_id=1563134329]
+stream = ExtResource("10_efxa6")
 
 [connection signal="pressed" from="EstacaoCompleta/AreaBase/DeckContainer/DeckCartas" to="." method="_on_deck_cartas_pressed"]
 

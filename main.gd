@@ -9,6 +9,10 @@ extends Node
 @onready var label_pontos = $PanelContainer/BoxPontuacao/LabelPontos
 @onready var label_erros = $PanelContainer/BoxPontuacao/LabelErros
 @onready var label_acertos = $PanelContainer/BoxPontuacao/LabelAcertos
+# --- REFERÊNCIAS DE ÁUDIO E CÂMERA ---
+@onready var som_ponto = $SomPonto
+@onready var som_erro = $SomErro
+@onready var camera = $Camera2D # Arraste sua Camera2D para cá
 
 # --- RECURSOS ---
 var cena_carta = preload("res://Carta.tscn")
@@ -111,13 +115,39 @@ func adicionar_ponto_detalhado(categoria: String):
 	total_acertos += 1
 	combo_atual += 1
 	stats[categoria]["acertos"] += 1
-	var bonus = 5 if combo_atual >= 3 else 0
-	pontos += (10 + bonus)
+	
+	# Reinicia o som se ele já estiver tocando (evita falhas)
+	som_ponto.stop()
+	
+	# PITCH: Começa em 1.0 e sobe pouquinho. Máximo 1.3 (tom levemente mais agudo)
+	var novo_pitch = 1.0 + (combo_atual * 0.03)
+	som_ponto.pitch_scale = min(novo_pitch, 1.3)
+	som_ponto.play()
+	await get_tree().create_timer(0.30).timeout
+	# SHAKE: Curto e seco
+	if combo_atual >= 3:
+		if camera: camera.aplicar_shake(6.0)
+		Input.vibrate_handheld(40)
+		pontos += 15 # Bônus de combo
+	else:
+		if camera: camera.aplicar_shake(2.0)
+		Input.vibrate_handheld(20)
+		pontos += 10
+
 	_atualizar_ui()
 	_animar_label(label_pontos, Color.GREEN)
 
+
 func adicionar_erro_detalhado(categoria_da_carta: String):
 	total_erros += 1
+	som_erro.play()
+		# Feedback de combo quebrado
+	if combo_atual >= 3:
+		# Você pode adicionar um som de "falha" aqui se quiser
+		som_erro.play()
+		await get_tree().create_timer(0.30).timeout
+		Input.vibrate_handheld(200) # Vibração mais longa no erro
+		
 	combo_atual = 0
 	stats[categoria_da_carta]["erros"] += 1
 	_atualizar_ui()
