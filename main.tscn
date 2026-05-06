@@ -2,8 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cfaqos3px31bm" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bbxay37khkecq" path="res://slot_zone.tscn" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://csgp5og24paio" path="res://sprites/fundo.png" id="2_lquwl"]
 [ext_resource type="Texture2D" uid="uid://dv3f8vqy8pqyo" path="res://sprites/cartapad.png" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://cnwk51ft2fppl" path="res://pilha_visual.gd" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://daibnqbnjurcw" path="res://sprites/Valor.png" id="4_5vw27"]
+[ext_resource type="Texture2D" uid="uid://jcw8u2ojail3" path="res://sprites/necessario.png" id="5_kek77"]
+[ext_resource type="Texture2D" uid="uid://d078u2t34klay" path="res://sprites/lixo.png" id="6_4c57u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 bg_color = Color(0.29457638, 0.5543969, 0.13918734, 1)
@@ -40,7 +44,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0xm2m")
 
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=203517317]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 650.0
+mouse_filter = 1
+texture = ExtResource("2_lquwl")
+region_rect = Rect2(0, 0, 1152, 648)
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1215874863]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,12 +70,12 @@ custom_minimum_size = Vector2(0, 220)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 1.0
-offset_top = 2.0
-offset_right = 1.0
-offset_bottom = 222.0
+offset_left = -6.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 225.0
 grow_horizontal = 2
-theme_override_constants/separation = 200
+theme_override_constants/separation = 93
 alignment = 1
 
 [node name="ZonaValor" parent="ZonasContainer" unique_id=1836414484 instance=ExtResource("1_ig7tw")]
@@ -71,17 +84,32 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
 categoria_esperada = "valor"
 
+[node name="NinePatchRect" type="NinePatchRect" parent="ZonasContainer/ZonaValor" unique_id=922684456]
+layout_mode = 2
+texture = ExtResource("4_5vw27")
+
 [node name="ZonaNecessario" parent="ZonasContainer" unique_id=1222688652 instance=ExtResource("1_ig7tw")]
 custom_minimum_size = Vector2(160, 220)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1bvp3")
 categoria_esperada = "necessário"
 
+[node name="NinePatchRect" type="NinePatchRect" parent="ZonasContainer/ZonaNecessario" unique_id=940265408]
+layout_mode = 2
+texture = ExtResource("5_kek77")
+
+[node name="EspacadorEsquerda2" type="Control" parent="ZonasContainer/ZonaNecessario" unique_id=37629719]
+layout_mode = 2
+
 [node name="ZonaLixo" parent="ZonasContainer" unique_id=635569632 instance=ExtResource("1_ig7tw")]
 custom_minimum_size = Vector2(160, 220)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
 categoria_esperada = "lixo"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ZonasContainer/ZonaLixo" unique_id=1538487146]
+layout_mode = 2
+texture = ExtResource("6_4c57u")
 
 [node name="EstacaoCompleta" type="Control" parent="." unique_id=1733720475]
 custom_minimum_size = Vector2(1152, 240)
@@ -185,9 +213,17 @@ theme_override_constants/separation = 30
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=684274306]
+clip_contents = true
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 15.0
+offset_top = 40.0
+offset_right = 161.0
+offset_bottom = 178.0
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer" unique_id=1565544053]
+custom_minimum_size = Vector2(146, 0)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
 
 [node name="LabelPontos" type="Label" parent="VBoxContainer" unique_id=426054855]
 layout_mode = 2
