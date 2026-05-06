@@ -60,7 +60,7 @@ grow_vertical = 2
 script = ExtResource("1_0xm2m")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1034542009]
-position = Vector2(640, 360)
+anchor_mode = 0
 limit_left = 0
 limit_top = 0
 limit_right = 1280
